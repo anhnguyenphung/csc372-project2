@@ -1,0 +1,9 @@
+###
+### Author: Anh Nguyen Phung, Trong Nguyen
+### File: Program7.txt
+### Purpose: Produce a parsing error when a variable (non-command line argument variable)
+### contains non-alpha characters.
+###
+
+boolean invalidVar1 assign false
+printout invalidVar1

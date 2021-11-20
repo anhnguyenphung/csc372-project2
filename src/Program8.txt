@@ -1,0 +1,9 @@
+###
+### Author: Anh Nguyen Phung, Trong Nguyen
+### File: Program8.txt
+### Purpose: Produce a parsing error when there is unrecognized string/integer expression/
+### boolean expression for printing out.
+###
+
+printout "Valid string"
+printout Invalid string

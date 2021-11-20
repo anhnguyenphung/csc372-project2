@@ -1,0 +1,8 @@
+###
+### Author: Anh Nguyen Phung, Trong Nguyen
+### File: Program10.txt
+### Purpose: Produce a parsing error when trying to declare a variable that is already declared.
+###
+
+integer x assign 1
+integer x assign 2

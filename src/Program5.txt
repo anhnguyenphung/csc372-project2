@@ -1,0 +1,9 @@
+###
+### Author: Anh Nguyen Phung, Trong Nguyen
+### File: Program5.txt
+### Purpose: Produce a parsing error when trying to declare a variable without specifying 
+### the type (integer or boolean).
+###
+
+x assign 3 add 2
+printout x

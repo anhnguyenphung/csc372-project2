@@ -1,0 +1,9 @@
+###
+### Author: Anh Nguyen Phung, Trong Nguyen
+### File: Program6.txt
+### Purpose: Produce a parsing error when assigning an invalid integer expression to a
+### variable of type integer.
+###
+
+integer x assign true
+printout x

@@ -1,0 +1,21 @@
+###
+### Author: Anh Nguyen Phung, Trong Nguyen
+### File: Program1.txt
+### Purpose: Take 3 command line arguments x, y, m, then calculate and print out the number of
+### multiples of x and y in the range 1 to m.
+###
+
+use 3 cmd args 						# use 3 command line args arg0, arg1, arg2
+
+integer count assign 0					# int count = 0
+integer i assign 1					# int i = 1
+
+during i lte arg2					# while (i < arg2)
+	if i mod arg0 equal 0 or i mod arg1 equal 0	# if (i % arg0 == 0 || i % arg1 == 0)
+		count assign count add 1		# count = count + 1
+	end 
+	i assign i add 1				# i = i + 1
+end
+
+printout count						# System.out.println(count)
+

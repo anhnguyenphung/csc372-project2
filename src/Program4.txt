@@ -1,0 +1,10 @@
+###
+### Author: Anh Nguyen Phung, Trong Nguyen
+### File: Program4.txt
+### Purpose: Produce a parsing error when the condition in an if/while statement is an invalid
+### boolean expression.
+###
+
+if 3 add 2
+	printout "This would not be printed since the condition in the if statement is invalid!"
+end
