@@ -17,7 +17,7 @@ Suppose you write a program `Program.txt` in our language. To compile and run, y
 * `javac Translator.java` to compile the translator program.
 * `java Translator Program.txt` to convert the program from our language into Java. If there are any parsing errors, the error message would be printed out to the terminal.
 * `javac Program.java` to compile the program in Java.
-* `java Program` to run the program with any required command line arguments. For example, `java Program 3 4 5`.
+* `java Program` to run the program with any command line arguments. For example, `java Program 3 4 5`.
 
 
 ## Basic syntax
@@ -45,14 +45,15 @@ There should be a space before and after each keyword, except for `not` that onl
 
 All operations are left associative, with order of highest to lowest precedence (from left to right) and any operations that have equal precedence are placed in { }.
 
-`<int_expr> <comparator> <int_expr>`, `not`, `and`, `or`
+{`<int_expr> <comparator> <int_expr>`, `not`}, `and`, `or`
 
 ##### Note: Our language does not comparison between boolean values. So something like `2 gt 3 equal true` is invalid in our language.
+##### Note: Something like `not 2 gt 3` is invalid in our language.
 
 Examples of valid boolean expression:
 ```shell
 2 lt 3 and 3 mod 1 equal 0
-not 2 gte 3
+not x                       # with 'boolean x assign true'
 2 diff 3 or true
 ```
 
@@ -61,8 +62,8 @@ In our language, you can declare variables of type integer and boolean. The name
 alphabetical characters (both uppercase and lowercase)
 ```shell
 integer a assign 5
-integer b assign 2 add 3
-boolean x assign true
+integer B assign 2 add 3
+boolean X assign true
 boolean y assign 2 gte 3
 ```
 You can not re-declare a variable. For example, the codes below are considered invalid:
@@ -77,7 +78,7 @@ integer a assign 4
 
 ### Reassign variable
 In our language, you can reassign the value of a variable if that variable is already declared. If reassigned, the value must be the same type as the declared type.
-Moreover, you can not reassign the value of a variable if that variable is nor declared first.
+Moreover, you can not reassign the value of a variable if that variable is not declared first.
 
 Example of valid variable reassignment:
 ```shell
@@ -117,7 +118,7 @@ end
 ```
 
 ### Loops
-Our language supports `break` statement. Examples of valid loops:
+Examples of valid loops:
 ```shell
 integer i assign 0
 during i lt 2         # while i < 2
@@ -129,9 +130,10 @@ end
 integer i assign 0
 during i lt 2         # while i < 2
   if i equal 1
-    break
+    printout "World!"
+  else
+    printout "Hello"
   end
-  printout "Hello"
   i assign i add 1    # i = i + 1
 end
 ```
@@ -156,5 +158,9 @@ Another example is that if you want to read in two command line arguments and pr
 use 2 cmd args
 printout arg0 add arg1
 ```
+
+## Example programs
+You can find example programs in the GitHub repo, with `Program1.txt` and `Program2.txt` are valid programs in our language and `ProgramX.txt` where `X` from `3` to `10` inclusive
+are programs that produce parsing errors.
 
 
