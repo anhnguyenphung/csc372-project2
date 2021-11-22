@@ -43,15 +43,6 @@ public class Translator {
 		}
 		sc.close();
 		
-		// create a new Java file to store the program in our language in txt file
-		String outFileName = args[0].replace(".txt", ".java");
-		File outFile = new File(outFileName);
-		outFile.createNewFile();
-		PrintWriter pw = new PrintWriter(outFileName);
-		pw.close();
-		
-		FileWriter fw = new FileWriter(outFileName, true);
-	    BufferedWriter bw = new BufferedWriter(fw);
 	    String outContent = "public class ";
 	    outContent += args[0].replace(".txt", "");
 	    outContent += "{\npublic static void main(String args[]) {\n";
@@ -61,9 +52,12 @@ public class Translator {
 	    	// handle comment
 	    	Pattern comment = Pattern.compile("(.*)#(.*)");
 	    	Matcher m = comment.matcher(statement);
-	    	while (m.find()) {
+	    	Pattern quote = Pattern.compile("\"");
+	    	Matcher mm = quote.matcher(statement);
+	    	while (m.find() && !mm.find()) {
 	    		statement = m.group(1);
 	    		m = comment.matcher(statement);
+	    		mm = quote.matcher(statement);
 	    	}
 	    	
 	    	statement = statement.strip();
@@ -134,6 +128,15 @@ public class Translator {
 	    	lineNum ++;
 	    }
 	    outContent += "\n}\n}";
+	    // create a new Java file to store the program in our language in txt file
+	 	String outFileName = args[0].replace(".txt", ".java");
+	 	File outFile = new File(outFileName);
+	 	outFile.createNewFile();
+	 	PrintWriter pw = new PrintWriter(outFileName);
+	 	pw.close();
+	 	
+	    FileWriter fw = new FileWriter(outFileName, true);
+	    BufferedWriter bw = new BufferedWriter(fw);
 	    bw.write(outContent);
 	    bw.close();
 	
@@ -150,12 +153,12 @@ public class Translator {
      * 
      */
 	private static void handleInvalidSymbol(String statement, int lineNum) {
-		Pattern symbol = Pattern.compile("(.*)([\\W&&[^ \"\t\n]])(.*)");
+		Pattern symbol = Pattern.compile("(.*)([\\W&&[^# \"\t\n]])(.*)");
 		Matcher m = symbol.matcher(statement);
 		if (m.find()) {
 			System.out.print("Error on line " + String.valueOf(lineNum) + " : ");
 			System.out.println("Unrecognized symbol \"" + m.group(2) + "\" in a non-string. ");
-			System.out.println("Allowed symbols in non-strings are '\"' (for string), "
+			System.out.println("Allowed symbols in non-strings and non-comments are '\"' (for string), "
 					+ "'#' (for comment), space, tab, and new line (for usual code writing).");
 			System.exit(1);
 		}
@@ -453,9 +456,24 @@ public class Translator {
 		if (m.find() && m.group(1).length() + 4 == statement.length()) {
 			return check_bool_root_expr(m.group(1));
 		}
+		return check_bool_root_expr(statement);
+	}
+
+
+	/**
+     * Purpose: Return true if the string is a valid root boolean expression based on our language,
+     * false otherwise.
+     * 
+     * @param statement, is the string to process
+     * 
+     * @return True if the string is a valid root boolean expression based on our language, false
+     * otherwise
+     * 
+     */
+	private static boolean check_bool_root_expr(String statement) {
 		// check for the validity of comparison
-		sign = Pattern.compile("(.+) gt (.+)");
-		m = sign.matcher(statement);
+		Pattern sign = Pattern.compile("(.+) gt (.+)");
+		Matcher m = sign.matcher(statement);
 		if (m.find()) {
 			return check_int_expr(m.group(1)) && check_int_expr(m.group(2));
 		}
@@ -484,21 +502,6 @@ public class Translator {
 		if (m.find()) {
 			return check_int_expr(m.group(1)) && check_int_expr(m.group(2));
 		}
-		return check_bool_root_expr(statement);
-	}
-
-
-	/**
-     * Purpose: Return true if the string is a valid root boolean expression based on our language,
-     * false otherwise.
-     * 
-     * @param statement, is the string to process
-     * 
-     * @return True if the string is a valid root boolean expression based on our language, false
-     * otherwise
-     * 
-     */
-	private static boolean check_bool_root_expr(String statement) {
 		statement = statement.strip();
 		if (statement.equals("true")) {
 			return true;
@@ -507,7 +510,7 @@ public class Translator {
 			return true;
 		}
 		Pattern var = Pattern.compile("[^a-zA-Z]+");
-		Matcher m = var.matcher(statement);
+		m = var.matcher(statement);
 		if (!m.find() && setBoolVar.contains(statement)) {
 			return true;
 		}
