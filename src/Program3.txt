@@ -2,8 +2,8 @@
 ### Author: Anh Nguyen Phung, Trong Nguyen
 ### File: Program3.txt
 ### Purpose: Produce a parsing error when there is a symbol (non-alpha, non-digit) character
-### in the code other than '"' (for string), '#' (for comment), space, tab, and new line
-### (for usual code writing).
+### in the code other than double quote (for string), '#' (for comment), space, tab, and
+### new line (for usual code writing).
 ###
 
 integer x assign (3 add 4) mult 7

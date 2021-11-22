@@ -117,8 +117,6 @@ public class Translator {
 	    		outContent += "} else {\n";
 	    	} else if (statement.equals("end")) {
 	    		outContent += "}\n";
-	    	} else if (statement.equals("break")) {
-	    		outContent += "break;\n";
 	    	} else if (statement.equals("")) {
 	    	} else {
 	    		System.out.print("Error on line " + String.valueOf(lineNum) + " : ");

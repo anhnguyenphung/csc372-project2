@@ -1,8 +1,8 @@
 ###
 ### Author: Anh Nguyen Phung, Trong Nguyen
 ### File: Program2.txt
-### Purpose: Take one command line argument that is an integer x and print out "prime" if
-### x is prime and "not prime" if it is not prime. 
+### Purpose: Take one command line argument that is an integer x and print out 'prime' if
+### x is prime and 'not prime' if it is not prime. 
 ###
 
 use 1 cmd args 				# use 1 command line args arg0
@@ -12,15 +12,15 @@ boolean flag assign true  		# boolean flag = true
 
 during i lt arg0 			# while (i < arg0)
 	if arg0 mod i equal 0 		# if (arg 0 % i == 0)
-		flag assign false 	# flag = false 
-		break
+		flag assign false 	# flag = false
+		i assign arg0		# i = arg0
 	end
 	i assign i add 1		# i = i + 1
 end
-					# Note: Write "flag == true" is invalid in our language
+					# Note: Write 'flag == true' is invalid in our language
 if flag					# if (flag == true)
-	printout "prime"		# System.out.println("prime")
+	printout "prime"		
 else
-	printout "not prime"		# System.out.println("not prime")
+	printout "not prime"
 end
 
