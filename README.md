@@ -10,7 +10,7 @@ Some key highlights from our language:
 * Each line of code in our language needs to be on a seperate line (no need for indentation like Python, but indetation improves code readability).
 
 ## Grammar
-For more references, you can look at the grammar [here](https://realpython.com/get-started-with-django-1/) to understand the syntax better.
+For more references, you can look at the grammar [here](https://github.com/anhnguyenphung/csc372-project2/blob/master/CSC%20372%20Project%202%20Grammar.pdf) to understand the syntax better.
 
 ### Run the program in our language
 Suppose you write a program `Program.txt` in our language. To compile and run, you should run the following commands in the terminal:
