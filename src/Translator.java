@@ -454,24 +454,9 @@ public class Translator {
 		if (m.find() && m.group(1).length() + 4 == statement.length()) {
 			return check_bool_root_expr(m.group(1));
 		}
-		return check_bool_root_expr(statement);
-	}
-
-
-	/**
-     * Purpose: Return true if the string is a valid root boolean expression based on our language,
-     * false otherwise.
-     * 
-     * @param statement, is the string to process
-     * 
-     * @return True if the string is a valid root boolean expression based on our language, false
-     * otherwise
-     * 
-     */
-	private static boolean check_bool_root_expr(String statement) {
 		// check for the validity of comparison
-		Pattern sign = Pattern.compile("(.+) gt (.+)");
-		Matcher m = sign.matcher(statement);
+		sign = Pattern.compile("(.+) gt (.+)");
+		m = sign.matcher(statement);
 		if (m.find()) {
 			return check_int_expr(m.group(1)) && check_int_expr(m.group(2));
 		}
@@ -500,6 +485,21 @@ public class Translator {
 		if (m.find()) {
 			return check_int_expr(m.group(1)) && check_int_expr(m.group(2));
 		}
+		return check_bool_root_expr(statement);
+	}
+
+
+	/**
+     * Purpose: Return true if the string is a valid root boolean expression based on our language,
+     * false otherwise.
+     * 
+     * @param statement, is the string to process
+     * 
+     * @return True if the string is a valid root boolean expression based on our language, false
+     * otherwise
+     * 
+     */
+	private static boolean check_bool_root_expr(String statement) {
 		statement = statement.strip();
 		if (statement.equals("true")) {
 			return true;
@@ -508,7 +508,7 @@ public class Translator {
 			return true;
 		}
 		Pattern var = Pattern.compile("[^a-zA-Z]+");
-		m = var.matcher(statement);
+		Matcher m = var.matcher(statement);
 		if (!m.find() && setBoolVar.contains(statement)) {
 			return true;
 		}
