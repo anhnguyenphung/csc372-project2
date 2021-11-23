@@ -1,1 +1,0 @@
-printout not 2 gte 3 and 3 gt 2
